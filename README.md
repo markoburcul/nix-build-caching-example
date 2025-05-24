@@ -82,3 +82,15 @@ nix develop -L --verbose
 copying path '/nix/store/vs3gf5frf8x4nclqcwac4rv60ifkpz12-cached-package' from 'https://nix-cache.status.im'...
 building '/nix/store/giy26sbn1x4z9zpxp90wbijr426bj9cj-nix-shell-env.drv'...
 ```
+
+## Update
+
+The issue was with this line:
+```nix
+src = "./";
+```
+
+According to the [docs](https://nix.dev/guides/best-practices#reproducible-source-paths) to have reproducible source paths:
+```nix
+src = builtins.path { path = ./.; name = "nix-build-caching-example"; };
+```

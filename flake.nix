@@ -27,7 +27,7 @@
     in {
       test = pkgs.stdenv.mkDerivation {
         name = "cached-package";
-        src = "./";
+        src = builtins.path { path = ./.; name = "nix-build-caching-example"; };
         phases = [ "buildPhase" "installPhase" ];
         buildPhase = ''
           dd if=/dev/zero of=largefile.dat  bs=24M  count=1 > largefile.dat
